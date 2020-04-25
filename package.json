@@ -20,7 +20,9 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "open": "^7.0.3",
+    "opn": "^6.0.0"
   },
   "devDependencies": {}
 }

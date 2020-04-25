@@ -1,0 +1,35 @@
+a {color: red !important}
+body {background-color: black }
+p{color: aliceblue}
+#dude { background-color: greenyellow};
+ #tdcolor {
+     background-color: aliceblue ;
+  }
+  
+  h1{font-family: Impact; 
+color: blue;
+
+text-align: center;
+text-shadow: 5px 0 0 green, -2px 0 0 green, 0 2px 0 green, 0 -2px 0 green, 1px 1px green, -1px -1px 0 green, 1px -1px 0 green, -1px 1px 0 green;
+font-size: 150px}
+
+#one {text-align: left;   }
+#two {text-align: right; width: 58%; }
+tr {background-color: midnightblue;}
+table {text-align: center;}
+img {display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px}
+    h4{color: aliceblue;}
+    #tdid, #tdid2{
+        color: red !important;
+    
+    }
+
+    #tdid:hover{cursor: pointer; text-decoration:underline;}
+    #hidden{visibility: hidden; text-align: center; }
+    #three{text-align: right !important; width: 630px }
+    #bye{border-color: transparent; background-color: transparent; color: red; }
+ #bye:hover{text-decoration:underline;}
+ 

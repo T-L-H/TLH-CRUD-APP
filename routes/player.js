@@ -5,6 +5,8 @@ module.exports = {
         response.render('edit-players', {add: true});
     },
 
+   
+
     addPlayer: function (request, response) {
         
         let first_name = request.body.first_name;

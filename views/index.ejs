@@ -1,37 +1,104 @@
 <%- include('partials/header'); %>
+<script>
+function visible(){
+    document.getElementById("bye").style.visibility = "hidden";
+    document.getElementById("hidden").style.visibility = "visible";
+    document.getElementById("password").style.visibility = "hidden";
+    document.getElementById("passstuff").style.visibility = "visible";
+   document.getElementById("display").innerHTML = "";
+}
 
-<div>
-<% if (players.length > 0) { %>}
+
+function trying(){
+    open( 'https://www.google.com/search?q=' + document.getElementById ( "tdid" ).innerText + " " + document.getElementById ( "tdid2" ).innerText + '&oq=google&aqs=chrome..69i57j69i59j0j69i65l2j69i60l3.887j0j7&sourceid=chrome&ie=UTF-8', function (err) {
+  if ( err ) throw err;    
+});
+}
+function myAlert(){
+   var dontShow = alert("Admin only can delete and edit ratings.");
+}
+function message() {
+   
+    if (document.getElementById("psw").value == "Admin") {
+        document.getElementById("password").style.visibility = "visible";
+        document.getElementById("passstuff").style.visibility = "hidden";
+    document.getElementById("display").innerHTML = "Welcome Admin!";
+    document.getElementById("yes").onclick = true;
+    document.getElementById("yes2").onclick = true;
+  
+    document.getElementById("yes2").style.backgroundColor = "orange";
+    
+    document.getElementById("yes").style.backgroundColor = "green";
+    myAlert = undefined;
+  } 
+  else{ document.getElementById("display").innerHTML = "WRONG PASSWORD!!!"; 
+  
+  document.getElementById("password").style.visibility = "visible";
+  document.getElementById("bye").style.visibility = "visible";
+  document.getElementById("passstuff").style.visibility = "hidden";
+}
+}
+
+
+
+</script>
+<div id="hidden">
+<h4 id="display"></h4>
+<div id="passstuff">
+<p>Admin Password:</p><input id="psw" type="password" name="password"/>
+  <br>
+  <br>
+  <input type="button" value="Login" onclick="message();" style="color: tomato; background-color:teal" /></div>
+  <br>
+  </div>
+<div id="password">
+<h1>MOO-SICK RATER!!!</h1>
+<img src="https://media.istockphoto.com/illustrations/strange-cow-illustration-id163856133?k=6&m=163856133&s=612x612&w=0&h=ZbKSmJ0WT_gpgSQ2VVk-mSt5-xorVVkSstfjRZ4goIA=" alt="">
+<br>
+<br>
+<% if (players.length > 0){%>  
     <table class="table">
- <thead class="thead-dark">
+ <thead class="thead-dark" >
 <tr>
-    <th>ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Position</th>
-    <th>Number</th>
+    <th>Album Number</th>
+    <th>Album Name</th>
+    <th>Artist</th>
+    <th>Genre</th>
+    <th>Rating</th>
+    <th>Edit</th>
+    <th>Delete</th>
 </tr>
 
  </thead>
 <tbody>
     <% for(let i = 0; i < players.length; i++) { %>
     <tr>
-        <td> <%= players[i].id %> </td>
-        <td> <%= players[i].first_name %> </td>
-        <td> <%= players[i].last_name %> </td>
-        <td> <%= players[i].position %> </td>
-        <td> <%= players[i].number %> </td>
-        <td> <a href="/edit/<%= players[i].id %>" class="btn btn-sm btn-success">Edit</a></td>
-        <td> <a href="/delete/<%= players[i].id %>" class="btn btn-sm btn-danger">Delete</a></td>
+       
+        <td style="color:aliceblue"> <%= players[i].id %> </td>
+        <td id="tdid" > <a onclick="trying()"><%= players[i].first_name %> </a> </td>
+        <td id="tdid2" > <%= players[i].last_name %> </td>
+        <td style="color:aliceblue"> <%= players[i].position %> </td>
+        <td style="color:aliceblue"> <%= players[i].number %> </td>
+        
+        <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/edit/<%= players[i].id %>"class="btn btn-sm btn-success" id="yes" onclick="return false" style="background-color:gray; color: white !important" >Edit</a></div></td>
+        <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/delete/<%= players[i].id %>" class="btn btn-sm btn-danger" onclick="return false; " id="yes2" style="background-color:gray; color: white !important">Delete</a></div></td>
         <% } %>
     </tr>
 </tbody>
 
     </table>
     <% } else { %>
-    <p class="text-center">No Players Found.</p>
+    <p class="text-center">No Albums Added Yet... How about you add one!!!</p>
     <% } %>
 </div>
+</div> 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
+
 </body>
 </html>

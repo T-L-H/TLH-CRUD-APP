@@ -32,12 +32,17 @@ let app = express();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
  app.use(express.json());
+ app.use(express.static('static'));
  app.post('/add', player.addPlayer);
+
 app.get('/', index.getHomePage);
 app.get('/add', player.addPlayerPage);
 app.get('/edit/:id', player.editPlayerPage);
 app.get('/delete/:id', player.deletePlayer);
 app.post('/edit/:id', player.editPlayer);
+
+
+
 
 
 
