@@ -1,6 +1,121 @@
 <%- include('partials/header'); %>
 <script>
-function visible(){
+
+
+function SaveItem() {
+				
+                var name = document.forms.ShoppingList.name.value;
+                var data = document.forms.ShoppingList.data.value;
+                localStorage.setItem(name, data);
+                doShowAll();
+                
+            }
+           
+            function ModifyItem() {
+                var name1 = document.forms.ShoppingList.name.value;
+                var data1 = document.forms.ShoppingList.data.value;
+               
+                
+            
+                        if (localStorage.getItem(name1) !=null)
+                        {
+                         
+                          localStorage.setItem(name1,data1);
+                          document.forms.ShoppingList.data.value = localStorage.getItem(name1);
+                        }
+                    
+                
+                doShowAll();
+            }
+          
+            function RemoveItem() {
+                var name = document.forms.ShoppingList.name.value;
+                document.forms.ShoppingList.data.value = localStorage.removeItem(name);
+                doShowAll();
+            }
+            //-------------------------------------------------------------------------------------
+            //restart the local storage
+            function ClearAll() {
+                localStorage.clear();
+                doShowAll();
+            }
+           
+            function doShowAll() {
+                if (CheckBrowser()) {
+                    var key = "";
+                    var list = "<tr><th>Review</th><th>Username</th></tr>\n";
+                    var i = 0;
+                   
+                    for (i = 0; i <= localStorage.length-1; i++) {
+                        key = localStorage.key(i);
+                        list += "<tr><td>" + key + "</td>\n<td>"
+                                + localStorage.getItem(key) + "</td></tr>\n";
+                    }
+                 
+                    if (list == "<tr><th>Review</th><th>Username</th></tr>\n") {
+                        list += "<tr><td><i>No Review Yet.</i></td>\n<td><i>No Review Yet.</i></td></tr>\n";
+                    }
+                 
+                    document.getElementById('list').innerHTML = list;
+                } else {
+                    alert('Cannot save shopping list as your browser does not support HTML 5');
+                }
+            }
+            
+          
+            function CheckBrowser() {
+                if ('localStorage' in window && window['localStorage'] !== null) {
+                   
+                    return true;
+                } else {
+                        return false;
+                }
+            }
+          
+
+
+
+
+
+
+function addText() {
+	var newParagraph = document.createElement('h4');
+	newParagraph.textContent = textArea.value;
+    document.getElementById("id1").insertBefore(newParagraph, textArea)
+	
+}
+
+    function newPage(){
+        document.getElementById("info").style.visibility = "hidden";
+        document.getElementById("id1").style.visibility = "visible";
+        document.getElementById("name").style.visibility = "visible";
+        document.getElementById("password").style.visibility = "hidden";
+    var x = document.getElementById("myBtn").textContent;
+    var xy = document.getElementById("tdid2").textContent;
+    var xyz = document.getElementById("rates").textContent;
+  document.getElementById("demo").innerHTML = "Album Name: " + x + "<br /> By: " + xy;  
+   
+   if(xyz === "5"){
+    document.getElementById("review").innerHTML = x + " was an AMAZING album! Every song kept me ready to listen to more! " + xy + " really gave it their all and I am ESTATIC to hear what " + xy  + " comes out with next!"; 
+   }
+
+   else if(xyz === "4"){
+    document.getElementById("review").innerHTML = x + " was actually a pretty good album! The songs and lyrics were pretty good, and their were only a select few weak songs.  " + xy + " really put their mark on the music industry with this album. With more room to grow, " + xy + " has a bright future ahead for them!"; 
+   }
+   else if(xyz === "3"){
+    document.getElementById("review").innerHTML = x + " was OK... The songs and lyrics were decent on most of the songs, but you could tell  " + xy + " really didn't give it their all. "+ x + " is a good album for a fan, but besides that, " + xy + " needs to do a little better."; 
+   }
+   else if(xyz === "2"){
+    document.getElementById("review").innerHTML = x + " kinda stunk. The songs and lyrics were terrible, but there was only one or two songs that were decent.  " + xy + " really didn't try, and I'm starting to question why they put out this album. Unless you are a die-hard " + xy + " fan, don't listen to this album." ; 
+   }
+   else if(xyz === "1"){
+    document.getElementById("review").innerHTML = x + " was one of the worst albums my eardrums ever had the insatisfactory of listening to. The songs and lyrics were rubbish and pointless, and was a waste of my valuable time!  " + xy + " really didn't care did they? Because if they did care, they wouldn't of put this trash for the entire world to hear! Fan of " + xy + " or not, you will hate this album. I would understand if their parents would neglet " + xy + " for the rest of their lives because I certainly would!"; 
+   }
+  
+    }
+
+
+    function visible(){
     document.getElementById("bye").style.visibility = "hidden";
     document.getElementById("hidden").style.visibility = "visible";
     document.getElementById("password").style.visibility = "hidden";
@@ -19,12 +134,14 @@ function myAlert(){
 }
 function message() {
    
-    if (document.getElementById("psw").value == "Admin") {
+    if (document.getElementById("psw").value == "OwlCity") {
+
         document.getElementById("password").style.visibility = "visible";
         document.getElementById("passstuff").style.visibility = "hidden";
     document.getElementById("display").innerHTML = "Welcome Admin!";
     document.getElementById("yes").onclick = true;
     document.getElementById("yes2").onclick = true;
+    document.getElementById("clear").disabled = false;
   
     document.getElementById("yes2").style.backgroundColor = "orange";
     
@@ -42,6 +159,12 @@ function message() {
 
 
 </script>
+
+
+
+
+
+   
 <div id="hidden">
 <h4 id="display"></h4>
 <div id="passstuff">
@@ -74,11 +197,11 @@ function message() {
     <% for(let i = 0; i < players.length; i++) { %>
     <tr>
        
-        <td style="color:aliceblue"> <%= players[i].id %> </td>
-        <td id="tdid" > <a onclick="trying()"><%= players[i].first_name %> </a> </td>
+        <td style="color:aliceblue" ><a onclick="newPage()" id="cursor"> <%= players[i].id %> </a></td>
+        <td id="tdid" > <a onclick="trying()" id="myBtn"><%= players[i].first_name %> </a> </td>
         <td id="tdid2" > <%= players[i].last_name %> </td>
         <td style="color:aliceblue"> <%= players[i].position %> </td>
-        <td style="color:aliceblue"> <%= players[i].number %> </td>
+        <td style="color:aliceblue" id="rates"><%= players[i].number %></td>
         
         <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/edit/<%= players[i].id %>"class="btn btn-sm btn-success" id="yes" onclick="return false" style="background-color:gray; color: white !important" >Edit</a></div></td>
         <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/delete/<%= players[i].id %>" class="btn btn-sm btn-danger" onclick="return false; " id="yes2" style="background-color:gray; color: white !important">Delete</a></div></td>
@@ -92,13 +215,52 @@ function message() {
     <% } %>
 </div>
 </div> 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 </div>
+
+
+
+<div id="reviewStuff">
+    <p id="demo"></p>
+    <div id="box">
+    <p id="review"></p></div>
+    <p id="name" >-TLH (Admin & Head Album Reviewer)</p>
+    <br></div>
+    <div id="id1">
+            <form name=ShoppingList>
+    
+                    <div id="main">
+                        <table class="user">
+                            <tr>
+            
+                                <td><b>Review:</b><input type=text name=name></td>
+                                <td><b>Username:</b><input type=text name=data></td>
+                                
+    
+            
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <input type=button value="Add Review"   onclick="SaveItem()"> 
+                                  
+                                    <input type=button value="Delete Post" onclick="RemoveItem()">
+                                    <input type="button" value="Clear All*" id="clear" onclick="ClearAll()" disabled >
+                                   
+                                    <h6>*Clear All is Admin Only</h6>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            
+                    <div id="items_table">
+                        
+                        <table id=list class="user"></table>
+                    
+                    </div>
+                </form>
+        </div>
+<p id="info">Click the ID to look at the reviews of that album. Click the Album to resarch on your own more on that album.</p>
 
 </body>
 </html>
