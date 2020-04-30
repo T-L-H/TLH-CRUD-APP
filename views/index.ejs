@@ -33,8 +33,7 @@ function SaveItem() {
                 document.forms.ShoppingList.data.value = localStorage.removeItem(name);
                 doShowAll();
             }
-            //-------------------------------------------------------------------------------------
-            //restart the local storage
+           
             function ClearAll() {
                 localStorage.clear();
                 doShowAll();
@@ -85,31 +84,35 @@ function addText() {
 	
 }
 
-    function newPage(){
+    function newPage(albumName, artistName, albumRating){
         document.getElementById("info").style.visibility = "hidden";
         document.getElementById("id1").style.visibility = "visible";
         document.getElementById("name").style.visibility = "visible";
         document.getElementById("password").style.visibility = "hidden";
-    var x = document.getElementById("myBtn").textContent;
-    var xy = document.getElementById("tdid2").textContent;
-    var xyz = document.getElementById("rates").textContent;
-  document.getElementById("demo").innerHTML = "Album Name: " + x + "<br /> By: " + xy;  
+    //var albumName = document.getElementById("myBtn").textContent;
+   // var artistName = document.getElementById("tdid2").textContent;
+   // var albumRating = document.getElementById("rates").textContent;
+  document.getElementById("demo").innerHTML = "Album Name: " + albumName + "<br /> By: " + artistName;  
    
-   if(xyz === "5"){
-    document.getElementById("review").innerHTML = x + " was an AMAZING album! Every song kept me ready to listen to more! " + xy + " really gave it their all and I am ESTATIC to hear what " + xy  + " comes out with next!"; 
+   if(albumRating === "5"){
+    document.getElementById("review").innerHTML = albumName + " was an AMAZING album! Every song kept me ready to listen to more! " + artistName + " really gave it their all and I am ESTATIC to hear what " + artistName  + " comes out with next!"; 
    }
 
-   else if(xyz === "4"){
-    document.getElementById("review").innerHTML = x + " was actually a pretty good album! The songs and lyrics were pretty good, and their were only a select few weak songs.  " + xy + " really put their mark on the music industry with this album. With more room to grow, " + xy + " has a bright future ahead for them!"; 
+   else if(albumRating === "4"){
+    document.getElementById("review").innerHTML = albumName + " was actually a pretty good album! The songs and lyrics were pretty good, and their were only a select few weak songs.  " + artistName + " really put their mark on the music industry with this album. With more room to grow, " + artistName + " has a bright future ahead for them!"; 
    }
-   else if(xyz === "3"){
-    document.getElementById("review").innerHTML = x + " was OK... The songs and lyrics were decent on most of the songs, but you could tell  " + xy + " really didn't give it their all. "+ x + " is a good album for a fan, but besides that, " + xy + " needs to do a little better."; 
+   else if(albumRating === "3"){
+    document.getElementById("review").innerHTML = albumName + " was OK... The songs and lyrics were decent on most of the songs, but you could tell  " + artistName + " really didn't give it their all. "+ albumName + " is a good album for a fan, but besides that, " + artistName + " needs to do a little better."; 
    }
-   else if(xyz === "2"){
-    document.getElementById("review").innerHTML = x + " kinda stunk. The songs and lyrics were terrible, but there was only one or two songs that were decent.  " + xy + " really didn't try, and I'm starting to question why they put out this album. Unless you are a die-hard " + xy + " fan, don't listen to this album." ; 
+   else if(albumRating === "2"){
+    document.getElementById("review").innerHTML = albumName + " kinda stunk. The songs and lyrics were terrible, but there was only one or two songs that were decent.  " + artistName + " really didn't try, and I'm starting to question why they put out this album. Unless you are a die-hard " + artistName + " fan, don't listen to this album." ; 
    }
-   else if(xyz === "1"){
-    document.getElementById("review").innerHTML = x + " was one of the worst albums my eardrums ever had the insatisfactory of listening to. The songs and lyrics were rubbish and pointless, and was a waste of my valuable time!  " + xy + " really didn't care did they? Because if they did care, they wouldn't of put this trash for the entire world to hear! Fan of " + xy + " or not, you will hate this album. I would understand if their parents would neglet " + xy + " for the rest of their lives because I certainly would!"; 
+   else if(albumRating === "1"){
+    document.getElementById("review").innerHTML = albumName + " was one of the worst albums my eardrums ever had the insatisfactory of listening to. The songs and lyrics were rubbish and pointless, and was a waste of my valuable time!  " + artistName + " really didn't care did they? Because if they did care, they wouldn't of put this trash for the entire world to hear! Fan of " + artistName + " or not, you will hate this album. I would understand if their parents would neglet " + artistName + " for the rest of their lives because I certainly would!"; 
+   }
+
+   else if(albumRating === "0"){
+    document.getElementById("review").innerHTML = "Not Yet Rated."
    }
   
     }
@@ -124,25 +127,41 @@ function addText() {
 }
 
 
-function trying(){
-    open( 'https://www.google.com/search?q=' + document.getElementById ( "tdid" ).innerText + " " + document.getElementById ( "tdid2" ).innerText + '&oq=google&aqs=chrome..69i57j69i59j0j69i65l2j69i60l3.887j0j7&sourceid=chrome&ie=UTF-8', function (err) {
+function trying(albumName, artistName){
+    open( 'https://www.google.com/search?q=' + albumName + " " + artistName + '&oq=google&aqs=chrome..69i57j69i59j0j69i65l2j69i60l3.887j0j7&sourceid=chrome&ie=UTF-8', function (err) {
   if ( err ) throw err;    
 });
 }
-function myAlert(){
-   var dontShow = alert("Admin only can delete and edit ratings.");
-}
+
+
+ cancel = myAlert;
 function message() {
    
     if (document.getElementById("psw").value == "OwlCity") {
-
+        cancel = null;
         document.getElementById("password").style.visibility = "visible";
         document.getElementById("passstuff").style.visibility = "hidden";
     document.getElementById("display").innerHTML = "Welcome Admin!";
-    document.getElementById("yes").onclick = true;
-    document.getElementById("yes2").onclick = true;
+   // document.getElementById("yes").onclick = true;
+    //document.getElementById("yes2").onclick = true;
     document.getElementById("clear").disabled = false;
-  
+    var editButtons = document.getElementsByClassName("editButton");
+       for (let index = 0; index < editButtons.length; index++) {
+           const element = editButtons[index];
+              element.onclick = true;
+        element.style.backgroundColor = "green";
+       }
+
+
+       var deleteButtons = document.getElementsByClassName("deleteButton");
+       for (let index = 0; index < deleteButtons.length; index++) {
+           const element = deleteButtons[index];
+              element.onclick = true;
+        element.style.backgroundColor = "orange";
+       }
+       
+     
+    
     document.getElementById("yes2").style.backgroundColor = "orange";
     
     document.getElementById("yes").style.backgroundColor = "green";
@@ -197,14 +216,14 @@ function message() {
     <% for(let i = 0; i < players.length; i++) { %>
     <tr>
        
-        <td style="color:aliceblue" ><a onclick="newPage()" id="cursor"> <%= players[i].id %> </a></td>
-        <td id="tdid" > <a onclick="trying()" id="myBtn"><%= players[i].first_name %> </a> </td>
+        <td  style="color:aliceblue" ><a onclick="newPage('<%= players[i].first_name %>', '<%= players[i].last_name %>','<%= players[i].number %>')" id="cursor"> <%= players[i].id %> </a></td>
+        <td id="tdid" > <a onclick="trying('<%= players[i].first_name %>', '<%= players[i].last_name %>')" id="myBtn"><%= players[i].first_name %> </a> </td>
         <td id="tdid2" > <%= players[i].last_name %> </td>
         <td style="color:aliceblue"> <%= players[i].position %> </td>
         <td style="color:aliceblue" id="rates"><%= players[i].number %></td>
         
-        <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/edit/<%= players[i].id %>"class="btn btn-sm btn-success" id="yes" onclick="return false" style="background-color:gray; color: white !important" >Edit</a></div></td>
-        <td style="color:aliceblue"> <div onclick="myAlert()"  ><a href="/delete/<%= players[i].id %>" class="btn btn-sm btn-danger" onclick="return false; " id="yes2" style="background-color:gray; color: white !important">Delete</a></div></td>
+        <td  style="color:aliceblue"> <div  ><a href="/edit/<%= players[i].id %>"class="btn btn-sm btn-success editButton"  onclick="return false" style="background-color:gray; color: white !important" >Edit</a></div></td>
+        <td style="color:aliceblue"> <div   ><a href="/delete/<%= players[i].id %>" class="btn btn-sm btn-danger deleteButton" onclick="return false; "  style="background-color:gray; color: white !important">Delete</a></div></td>
         <% } %>
     </tr>
 </tbody>
@@ -261,6 +280,6 @@ function message() {
                 </form>
         </div>
 <p id="info">Click the ID to look at the reviews of that album. Click the Album to resarch on your own more on that album.</p>
-
+<p class="text-center">Only Admin can Delete and Edit Ratings</p>
 </body>
 </html>
