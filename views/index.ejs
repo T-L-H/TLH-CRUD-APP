@@ -167,6 +167,10 @@ function message() {
     document.getElementById("yes").style.backgroundColor = "green";
     myAlert = undefined;
   } 
+
+
+
+
   else{ document.getElementById("display").innerHTML = "WRONG PASSWORD!!!"; 
   
   document.getElementById("password").style.visibility = "visible";
@@ -175,6 +179,21 @@ function message() {
 }
 }
 
+
+     function secret(){
+    
+        document.getElementById("rotating_image").style.transform = "rotate(360deg) scale(6.5)"; 
+        document.getElementById('rotating_image').style.filter = "hue-rotate(2650deg)";
+
+}
+
+function secret2(){
+    
+    document.getElementById("rotating_image").style.transform = "rotate(-360deg) scale(-6.5)"; 
+
+    document.getElementById('rotating_image').style.filter = "hue-rotate(-30deg)";
+     document.getElementById('rotating_image').style.setProperty("transform", "none");
+}
 
 
 </script>
@@ -194,8 +213,8 @@ function message() {
   <br>
   </div>
 <div id="password">
-<h1>MOO-SICK RATER!!!</h1>
-<img src="https://media.istockphoto.com/illustrations/strange-cow-illustration-id163856133?k=6&m=163856133&s=612x612&w=0&h=ZbKSmJ0WT_gpgSQ2VVk-mSt5-xorVVkSstfjRZ4goIA=" alt="">
+<h1 id="title" onclick="style='color: darkred'" ondblclick="style='color: blue'">MOO-SICK RATER!!!</h1>
+<img id="rotating_image" onclick="secret2()" src="https://media.istockphoto.com/illustrations/strange-cow-illustration-id163856133?k=6&m=163856133&s=612x612&w=0&h=ZbKSmJ0WT_gpgSQ2VVk-mSt5-xorVVkSstfjRZ4goIA=" alt="">
 <br>
 <br>
 <% if (players.length > 0){%>  
@@ -281,5 +300,7 @@ function message() {
         </div>
 <p id="info">Click the ID to look at the reviews of that album. Click the Album to resarch on your own more on that album.</p>
 <p class="text-center">Only Admin can Delete and Edit Ratings</p>
+
+<button onclick="secret()" id="cheat">CHEAT!!!</button>
 </body>
 </html>

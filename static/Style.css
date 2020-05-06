@@ -84,3 +84,35 @@ input[type="text"] {
     width: 300px;
    resize: both;
 }
+
+#rotating_image {
+    transition: transform 5s ease-in-out;
+    transition-property: all;
+  }
+
+
+  #title{  transition: transform 999s 999s;}
+  
+
+#title:hover{transform: rotate(350deg);  transition: transform 1s ease-in; 
+    display: block;
+
+
+}
+
+
+
+
+  #cheat{
+color: transparent;
+background-color: transparent;
+border-color: transparent;
+
+  }
+
+  #cheat:hover{
+    color: red;
+    background-color: blue;
+    border-color: green;
+    
+      }
